@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SI Proxy</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f0f2f5;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 48px;
+      max-width: 560px;
+      width: 90%;
+      box-shadow: 0 4px 24px rgba(0,0,0,0.1);
+    }
+    .logo { font-size: 40px; margin-bottom: 16px; }
+    h1 { font-size: 28px; color: #2c3e50; margin-bottom: 6px; }
+    .subtitle { color: #7f8c8d; font-size: 14px; margin-bottom: 36px; }
+    label { display: block; font-size: 14px; font-weight: 500; color: #444; margin-bottom: 8px; }
+    .input-row { display: flex; gap: 8px; }
+    input[type="text"] {
+      flex: 1;
+      padding: 12px 16px;
+      border: 1.5px solid #ddd;
+      border-radius: 8px;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    input[type="text"]:focus { border-color: #3498db; }
+    button {
+      padding: 12px 20px;
+      background: #3498db;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      cursor: pointer;
+      white-space: nowrap;
+      transition: background 0.2s;
+    }
+    button:hover { background: #2980b9; }
+    .hint { margin-top: 10px; font-size: 12px; color: #aaa; }
+    .footer { margin-top: 40px; color: #bbb; font-size: 12px; text-align: center; border-top: 1px solid #f0f0f0; padding-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="logo">🌐</div>
+    <h1>SI Proxy</h1>
+    <p class="subtitle">Sistemas para Internet 2 — FURG · Web Proxy com Controle de Conteúdo</p>
+    <label for="url">Digite a URL que deseja acessar:</label>
+    <div class="input-row">
+      <input type="text" id="url" placeholder="http://example.com" autofocus />
+      <button onclick="navigate()">Acessar</button>
+    </div>
+    <p class="hint">Exemplo: http://example.com ou example.com</p>
+    <div class="footer">SI Proxy — FURG 2026/1 &nbsp;|&nbsp; Sistemas para Internet 2</div>
+  </div>
+  <script>
+    document.getElementById('url').addEventListener('keydown', function(e) {
+      if (e.key === 'Enter') navigate();
+    });
+
+    function navigate() {
+      let input = document.getElementById('url').value.trim();
+      if (!input) return;
+      if (!input.startsWith('http://') && !input.startsWith('https://')) {
+        input = 'http://' + input;
+      }
+      window.location.href = '/' + input;
+    }
+  </script>
+</body>
+</html>
