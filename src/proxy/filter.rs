@@ -8,14 +8,12 @@ pub fn load(path: &str) -> Result<HashMap<String, String>> {
     Ok(words)
 }
 
-/// Replaces all blacklisted words in `html` (case-insensitive).
-/// Returns the modified string and whether any replacement was made.
 pub fn apply(html: &str, words: &HashMap<String, String>) -> (String, bool) {
     let mut result = html.to_string();
     let mut filtered = false;
 
     for (word, replacement) in words {
-        let pattern = format!("(?i){}", regex::escape(word));
+        let pattern = format!("(?i){}", regex::escape(word)); // ?i case-insensitive
         if let Ok(re) = Regex::new(&pattern) {
             let new = re.replace_all(&result, replacement.as_str()).into_owned();
             if new != result {

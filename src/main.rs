@@ -1,4 +1,7 @@
-use axum::{routing::{any, get}, Router};
+use axum::{
+    Router,
+    routing::{any, get},
+};
 use std::net::SocketAddr;
 use std::sync::Arc;
 
@@ -9,8 +12,7 @@ use proxy::AppState;
 async fn main() {
     let blocked =
         proxy::blocker::load("config/blocked.json").expect("Falha ao carregar blocked.json");
-    let words =
-        proxy::filter::load("config/words.json").expect("Falha ao carregar words.json");
+    let words = proxy::filter::load("config/words.json").expect("Falha ao carregar words.json");
 
     std::fs::create_dir_all("logs").expect("Falha ao criar diretório logs/");
 
@@ -19,7 +21,11 @@ async fn main() {
         .build()
         .expect("Falha ao criar cliente HTTP");
 
-    let state = Arc::new(AppState { blocked, words, client });
+    let state = Arc::new(AppState {
+        blocked,
+        words,
+        client,
+    });
 
     let app = Router::new()
         .route("/", get(proxy::service::home))
