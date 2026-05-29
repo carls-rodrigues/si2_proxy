@@ -5,10 +5,12 @@ pub mod logger;
 pub mod service;
 pub mod utils;
 
-use std::collections::HashMap;
+use std::collections::HashSet;
+
+use filter::WordFilter;
 
 pub struct AppState {
-    pub blocked: Vec<String>,
-    pub words: HashMap<String, String>,
+    pub blocked: HashSet<String>,
+    pub words: WordFilter,
     pub client: reqwest::Client,
 }
